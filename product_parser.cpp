@@ -28,8 +28,13 @@ Product* ProductParser::parse(string category,
 {
 
     parseCommonProduct(is, error, errorMsg, lineno);
+
     if(error) return NULL;
-    return parseSpecificProduct(category, is, error, errorMsg, lineno);
+        cout << category << endl;
+
+    Product* p= parseSpecificProduct(category, is, error, errorMsg, lineno);
+    return p;
+
 }
 
 void ProductParser::parseCommonProduct(std::istream& is,
@@ -114,7 +119,9 @@ Product* ProductBookParser::parseSpecificProduct(std::string category,
     if(error) {
         return NULL;
     }
+
     return makeProduct();
+    //return makeProduct();
 
 }
 
@@ -127,11 +134,16 @@ std::string ProductBookParser::categoryID()
 /**
  * Your job to fill in the code to create a new book product
  * using the data members in this class and the parent ProductParser class
+      * Dynamically allocates a specific product type from the data
+     *  parsed and stored in the specific product parser
  */
 Product* ProductBookParser::makeProduct()
 {
-
-
+    //data: author, name/title, isbn, price, quantity, category
+    
+   Product* p = new Book( prodName_, price_, qty_, isbn_,author_);
+   return p;
+    
 }
 
 
@@ -169,7 +181,10 @@ Product* ProductClothingParser::parseSpecificProduct(std::string category,
     if(error) {
         return NULL;
     }
+
+    
     return makeProduct();
+    //return makeProduct();
 
 }
 
@@ -186,8 +201,10 @@ std::string ProductClothingParser::categoryID()
 Product* ProductClothingParser::makeProduct()
 {
 
-
-
+    //data: size, name/title, brand, price, quantity, category
+     
+    Product* p = new Clothing(prodName_, price_, qty_, size_,brand_);
+    return p;
 }
 
 
@@ -246,5 +263,7 @@ std::string ProductMovieParser::categoryID()
 Product* ProductMovieParser::makeProduct()
 {
 
-
+    //data: genre, name/title, rating, price, quantity, category
+    Product* p = new Movie(prodName_, price_, qty_, genre_,rating_);
+    return p;
 }

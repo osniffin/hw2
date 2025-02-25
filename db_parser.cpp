@@ -110,6 +110,7 @@ ProductSectionParser::ProductSectionParser()
 {
     numRead_ = 0;
 }
+
 ProductSectionParser::~ProductSectionParser()
 {
     for(map<string, ProductParser*>::iterator it = prodParsers_.begin();
